@@ -1,6 +1,7 @@
-vendor
-.env
-composer.lock
-.idea
-index.php
-.DS_Store
+/.idea
+/.env
+/.env.*
+!/.env.example
+/composer.lock
+/*.cache
+/vendor

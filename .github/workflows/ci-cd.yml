@@ -1,0 +1,89 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+    types: [ opened, synchronize, reopened, closed ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  tests:
+    name: Pest
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed' && !contains(github.event.head_commit.message, '--no-change')
+    strategy:
+      matrix:
+        php: [8.3, 8.4, 8.5]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, bcmath, pdo, sqlite
+          coverage: xdebug
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Code Style
+        run: composer lint:check
+
+      - name: Run Tests
+        env:
+          XDEBUG_MODE: coverage
+        run: composer test -- --coverage --min=100
+
+  analysis:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed' && !contains(github.event.head_commit.message, '--no-change')
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Install Analysis Tools
+        run: composer analyze:install
+
+      - name: Run Static Analysis
+        run: composer analyze
+
+  release-please:
+    name: Release Please
+    needs: [ tests, analysis ]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v4
+        with:
+          release-type: php
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  cleanup-release-please:
+    name: Cleanup release-please branch
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release-please')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete release-please branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: |
+          gh api -X DELETE "/repos/${{ github.repository }}/git/refs/heads/${PULL_REQUEST_HEAD}"
