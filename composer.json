@@ -1,25 +1,52 @@
 {
-    "name": "mykemeynell/dotenv",
-    "description": "Load .env file into project environment, using same functions as Laravel",
+    "name": "mykemeynell/env",
+    "description": "Load and retrieve dotenv and YAML environment configuration.",
     "type": "library",
-    "keywords": ["dotenv", "dot", "env", "environment", "php", "laravel", "production", "development"],
-    "homepage": "https://github.com/mykemeynell/dotenv",
-    "license": "GPL",
-    "authors": [
-        {
-            "name": "Myke Howells",
-            "email": "iam@mykemeynell.com",
-            "homepage": "http://mykemeynell.com",
-            "role": "Developer"
-        }
+    "keywords": [
+        "configuration",
+        "dotenv",
+        "env",
+        "environment",
+        "php",
+        "yaml"
     ],
+    "homepage": "https://github.com/mykemeynell/dotenv",
+    "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
-        "vlucas/phpdotenv": "^2.2"
+        "php": "^8.3",
+        "symfony/yaml": "^7.4.12 || ^8.0.12",
+        "vlucas/phpdotenv": "^5.7"
     },
     "autoload": {
-        "files": [
-	        "env.php"
-        ]
+        "psr-4": {
+            "mykemeynell\\Env\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.26",
+        "pestphp/pest": "^4.7",
+        "phpstan/phpstan": "^2.1"
+    },
+    "scripts": {
+        "analyze:install": "composer install --working-dir=tools/phpstan --prefer-dist --no-progress --no-interaction",
+        "analyze": [
+            "@putenv XDEBUG_MODE=off",
+            "@php -d memory_limit=-1 tools/phpstan/vendor/bin/phpstan analyse --debug --memory-limit=-1"
+        ],
+        "lint": "pint",
+        "lint:check": "pint --test",
+        "test": "pest",
+        "test:coverage": "pest --coverage --min=100"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
     }
 }

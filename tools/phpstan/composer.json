@@ -1,0 +1,17 @@
+{
+    "name": "mykemeynell/reflection-phpstan",
+    "description": "Isolated PHPStan tooling for Reflector.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "phpstan/phpstan": "^2.2",
+        "pestphp/pest-plugin-phpstan": "^5.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    }
+}
