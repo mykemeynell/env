@@ -33,7 +33,11 @@
         "phpstan/phpstan": "^2.1"
     },
     "scripts": {
-        "analyze": "phpstan analyse --memory-limit=1G",
+        "analyze:install": "composer install --working-dir=tools/phpstan --prefer-dist --no-progress --no-interaction",
+        "analyze": [
+            "@putenv XDEBUG_MODE=off",
+            "@php -d memory_limit=-1 tools/phpstan/vendor/bin/phpstan analyse --debug --memory-limit=-1"
+        ],
         "lint": "pint",
         "lint:check": "pint --test",
         "test": "pest",
