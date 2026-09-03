@@ -1,0 +1,34 @@
+name: Release
+
+"on":
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: read
+  statuses: read
+
+jobs:
+  promotion:
+    name: Promote green development code
+    if: ${{ github.event_name != 'push' }}
+    uses: mykemeynell/workflows/.github/workflows/weekly-release.yml@v1
+    with:
+      required_check: Release Gate
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      RELEASE_APP_CLIENT_ID: ${{ secrets.RELEASE_APP_CLIENT_ID }}
+      RELEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
+  release:
+    name: Prepare or create release
+    if: ${{ github.event_name == 'push' }}
+    uses: mykemeynell/workflows/.github/workflows/release.yml@v1
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      RELEASE_APP_CLIENT_ID: ${{ secrets.RELEASE_APP_CLIENT_ID }}
+      RELEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
