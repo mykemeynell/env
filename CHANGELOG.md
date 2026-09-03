@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.1](https://github.com/mykemeynell/env/compare/v2.0.0...v2.0.1) (2026-09-03)
+
+
+### Miscellaneous Chores
+
+* housekeeping ([aedabf0](https://github.com/mykemeynell/env/commit/aedabf0be8b5d80a5b8a17fb7a262e691dac0b87))
+* trigger workflow ([15f1196](https://github.com/mykemeynell/env/commit/15f1196d8c31ba33151286f44bb173a3ea82a5d1))
+* update homepage URL in composer.json ([b1fd13b](https://github.com/mykemeynell/env/commit/b1fd13b3cf0ea7e47143c33483e5b9676649137d))
+
 ## [2.0.0](https://github.com/mykemeynell/dotenv/compare/1.0.2...v2.0.0) (2026-09-01)
 
 
