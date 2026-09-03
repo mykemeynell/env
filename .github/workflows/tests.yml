@@ -1,0 +1,31 @@
+name: Tests
+
+"on":
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality
+    uses: mykemeynell/workflows/.github/workflows/tests.yml@v1
+
+  release_gate:
+    name: Release Gate
+    if: ${{ always() }}
+    needs: [quality]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify reusable quality workflow
+        env:
+          QUALITY_RESULT: ${{ needs.quality.result }}
+        run: |
+          if [[ "$QUALITY_RESULT" != 'success' ]]; then
+            echo 'The reusable quality workflow did not succeed.' >&2
+            exit 1
+          fi

@@ -10,7 +10,7 @@
         "php",
         "yaml"
     ],
-    "homepage": "https://github.com/mykemeynell/dotenv",
+    "homepage": "https://github.com/mykemeynell/env",
     "license": "MIT",
     "require": {
         "php": "^8.3",
