@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.2](https://github.com/mykemeynell/env/compare/v2.0.1...v2.0.2) (2026-09-04)
+
+
+### Miscellaneous Chores
+
+* add CODEOWNERS file ([ac8434b](https://github.com/mykemeynell/env/commit/ac8434b8adeecd70a0ecbc26f83c11cdee39e4e2))
+* promote dev to main ([4029d7e](https://github.com/mykemeynell/env/commit/4029d7e589be94a04b02055de8bac8004135a1ec))
+* update badges and release links in README following repository rename ([a9ed472](https://github.com/mykemeynell/env/commit/a9ed4728dab58312113ae421b1d292100be85d3d))
+* update badges and release links in README following repository… ([896b5c5](https://github.com/mykemeynell/env/commit/896b5c5302c9179777aa23de4f42ee7a0a6fcce0))
+
 ## [2.0.1](https://github.com/mykemeynell/env/compare/v2.0.0...v2.0.1) (2026-09-03)
 
 
