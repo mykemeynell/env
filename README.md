@@ -1,8 +1,8 @@
 # Env
 
-![GitHub Release](https://img.shields.io/github/v/release/mykemeynell/dotenv)
-[![CI/CD (main)](https://img.shields.io/github/actions/workflow/status/mykemeynell/dotenv/ci-cd.yml?label=stable%20(main)&branch=main)](https://github.com/mykemeynell/dotenv/actions/workflows/ci-cd.yml)
-[![CI/CD (dev)](https://img.shields.io/github/actions/workflow/status/mykemeynell/dotenv/ci-cd.yml?label=dev&branch=dev)](https://github.com/mykemeynell/dotenv/actions/workflows/ci-cd.yml)
+![GitHub Release](https://img.shields.io/github/v/release/mykemeynell/env)
+[![CI/CD (main)](https://img.shields.io/github/actions/workflow/status/mykemeynell/env/tests.yml?label=stable%20(main)&branch=main)](https://github.com/mykemeynell/env/actions/workflows/tests.yml)
+[![CI/CD (dev)](https://img.shields.io/github/actions/workflow/status/mykemeynell/env/tests.yml?label=dev&branch=dev)](https://github.com/mykemeynell/env/actions/workflows/tests.yml)
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue.svg)](https://www.php.net)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 
