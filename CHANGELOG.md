@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/mykemeynell/env/compare/v2.0.2...v2.0.3) (2026-09-14)
+
+
+### Miscellaneous Chores
+
+* changed release to monday 2am utc ([7605d86](https://github.com/mykemeynell/env/commit/7605d86f08038ec54fbb7f327221c7a25db308a8))
+* promote dev to main ([be37004](https://github.com/mykemeynell/env/commit/be370049b9407972acc1570896bf935bc710b690))
+
 ## [2.0.2](https://github.com/mykemeynell/env/compare/v2.0.1...v2.0.2) (2026-09-04)
 
 
